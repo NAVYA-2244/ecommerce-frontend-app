@@ -21,7 +21,7 @@ function Login() {
             navigate("/login")
            }
            else{
-            navigate("/userHome")
+            navigate("/userHome",{state:u.data})
            }
         })
       }
