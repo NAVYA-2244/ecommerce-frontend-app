@@ -7,6 +7,7 @@ import "./cardcss.css"
 function UserHome() {
 var [products,setProducts]=useState([])
 var [cart,setCart]=useState([])
+var [cartitems,setCartitems]=useState(true)
  useEffect(()=>{
   axios.get('http://localhost:5000/user/viewproducts')
    .then((v)=>{
@@ -23,23 +24,36 @@ var [cart,setCart]=useState([])
   // var productdata=()=>{
   //   setProducts()
   // }
-  var addtocart=(p)=>{
-    cart.push(p)
-    setCart(cart)
-  }
+  // var addtocart=(p)=>{
+  //   cart.push(p)
+  //   setCart(cart)
+  // }
   return (
   <div>
+    <div><button onClick={()=>{setCart(cart);
+    setCartitems(false)}}>cart iteams</button></div>
+
     {/* {console.log(cart)} */}
-<div> <h1>hiii{userdata.uname}  email:{userdata.email}</h1>
+    <div> <h1>hiii{userdata.uname}  email:{userdata.email}</h1>
      {/* {console.log(location.state)} */}
       <h1>UserHomeUserHomeUserHomeUserHomeUserHomeUserHomeUserHome</h1></div>
      <div>
-     {products.map((ele,ind)=>{return <div key={ind} className="card pcard"><img src={ele.img} height="100px" width="100px"></img>                        
+     {cartitems? products.map((ele,ind)=>{return <div key={ind} className="card pcard"><img src={ele.img} height="100px" width="100px"></img>                        
         <p>product ID:{ele.id}</p><p>product item:{ele.item}</p><p>product brand:{ele.brand}</p>
           <p><button className='btn btn-success'
           onClick={()=>{ cart.push(ele);
          setCart(cart); console.log(cart);}}>add to cart</button></p>
-     </div>})}
+     </div>}):
+
+     cart.map((ele,ind)=>{return <div key={ind} className="card pcard"><img src={ele.img} height="100px" width="100px"></img>                        
+        <p>product ID:{ele.id}</p><p>product item:{ele.item}</p><p>product brand:{ele.brand}</p> 
+        <button className='btn btn-danger' onClick={()=>{
+          
+          cart.splice(ind,1)
+          setCart(cart)
+        }}>remove cart</button>
+      </div>})} 
+
 
     </div>
     </div>
