@@ -8,6 +8,7 @@ function AdminHome() {
   var [uflag,setUflag]=useState(false)
   var [prds,setPrds]=useState([])
   var [pflag,setPflag]=useState(false)
+  
   var viewuser=()=>{
     setUflag(!uflag)
     setPflag(false)
